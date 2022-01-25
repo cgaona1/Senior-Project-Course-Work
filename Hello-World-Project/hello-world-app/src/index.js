@@ -26,6 +26,7 @@ const element2 = (
     <h2>
       You're full name is: {formatName(user)}
     </h2>
+    <a href="https://github.com/cgaona1/Senior-Project-Course-Work"> My GitHub </a>
   </div>
 );
 
