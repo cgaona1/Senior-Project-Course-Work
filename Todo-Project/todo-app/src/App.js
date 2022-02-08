@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {nanoid} from "nanoid";
 import Todo from "./components/Todo";
 import Form from "./components/Form";
 
@@ -15,10 +16,10 @@ function App(props) {
   );
 
   function addTask(name) {
-    const newTask = { id: "id", taskName: name, completed: false };
+    const newTask = { id: "todo-"+nanoid(), taskName: name, completed: false };
     setTasks([...tasks, newTask]);
   }
-  
+
   return (
     <div className="todoapp">
       <h1>Todo App</h1>
