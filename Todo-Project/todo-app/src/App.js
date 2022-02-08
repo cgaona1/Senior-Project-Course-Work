@@ -1,14 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import Todo from "./components/Todo";
 import Form from "./components/Form";
 
-function addTask(name) {
-  alert(name);
-}
-
 function App(props) {
-  
-  const taskList = props.tasks.map(task => (
+  const [tasks, setTasks] = useState(props.tasks);
+  const taskList = tasks.map(task => (
     <Todo 
         id={task.id} 
         taskName={task.taskName} 
@@ -18,6 +14,11 @@ function App(props) {
     )
   );
 
+  function addTask(name) {
+    const newTask = { id: "id", taskName: name, completed: false };
+    setTasks([...tasks, newTask]);
+  }
+  
   return (
     <div className="todoapp">
       <h1>Todo App</h1>

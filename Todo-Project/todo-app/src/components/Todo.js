@@ -11,10 +11,10 @@ function Todo(props){
             </div>
             <div>
                 <button type="button">
-                    Edit <span className="">{props.taskName}</span>
+                    Edit
                 </button>
                 <button type="button">
-                    Delete <span className="">{props.taskName}</span>
+                    Delete
                 </button>
             </div>
         </li>
