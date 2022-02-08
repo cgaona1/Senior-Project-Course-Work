@@ -22,6 +22,7 @@ function App(props) {
     const newTask = { id: "todo-"+nanoid(), taskName: name, completed: false };
     setTasks([...tasks, newTask]);
   }
+
   function toggleTaskCompleted(id){
     const updatedTasks = tasks.map(task =>{
       if(id === task.id){
@@ -30,7 +31,6 @@ function App(props) {
       return task;
     });
     setTasks(updatedTasks);
-    console.log(tasks[0]);
   }
 
   return (
@@ -38,7 +38,6 @@ function App(props) {
       <h1>Todo App</h1>
       <h2>What needs to be done?</h2>
       <h2>{headingText}</h2>
-
       <Form addTask={addTask} />
       <ul
         role="list"
