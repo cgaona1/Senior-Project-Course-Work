@@ -1,3 +1,4 @@
+import Todo from "./components/Todo";
 
 function App(props) {
 
@@ -18,6 +19,13 @@ function App(props) {
         <button type="submit" className="">
           Add
         </button>
+        <ul 
+          role="list"
+          className=""
+          aria-labelledby="list-heading"
+        >
+          <Todo taskName="Eat" completed={false} id="todo-0"/>
+        </ul>
       </form>
     </div>
   );
