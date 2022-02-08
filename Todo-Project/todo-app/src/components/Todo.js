@@ -4,7 +4,13 @@ function Todo(props){
     return(
         <li>
             <div>
-                <input id="todo-0" type="checkbox" defaultChecked={props.completed}/>
+                <input
+                 id={props.id} 
+                 type="checkbox" 
+                 defaultChecked={props.completed}
+                 onChange={() => props.toggleTaskCompleted(props.id)}
+                />
+
                 <label htmlFor={props.id}>
                     {props.taskName}
                 </label>

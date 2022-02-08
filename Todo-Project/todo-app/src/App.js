@@ -11,6 +11,7 @@ function App(props) {
         taskName={task.taskName} 
         completed={task.completed}
         key={task.id}
+        toggleTaskCompleted={toggleTaskCompleted}
       />
     )
   );
@@ -20,6 +21,16 @@ function App(props) {
   function addTask(name) {
     const newTask = { id: "todo-"+nanoid(), taskName: name, completed: false };
     setTasks([...tasks, newTask]);
+  }
+  function toggleTaskCompleted(id){
+    const updatedTasks = tasks.map(task =>{
+      if(id === task.id){
+        return {...task, completed: !task.completed}
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+    console.log(tasks[0]);
   }
 
   return (
