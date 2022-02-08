@@ -14,6 +14,8 @@ function App(props) {
       />
     )
   );
+  const tasksNoun = taskList.length !== 1 ? "tasks" : "task";
+  const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
   function addTask(name) {
     const newTask = { id: "todo-"+nanoid(), taskName: name, completed: false };
@@ -23,6 +25,9 @@ function App(props) {
   return (
     <div className="todoapp">
       <h1>Todo App</h1>
+      <h2>What needs to be done?</h2>
+      <h2>{headingText}</h2>
+
       <Form addTask={addTask} />
       <ul
         role="list"

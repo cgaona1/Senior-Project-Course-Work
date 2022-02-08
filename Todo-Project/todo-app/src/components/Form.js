@@ -15,9 +15,6 @@ function Form(props){
 
     return(
         <form onSubmit={handleSubmit}>
-            <h2>
-                What needs to be done?
-            </h2>
             <input
                 type="text"
                 id="new-todo-input"
