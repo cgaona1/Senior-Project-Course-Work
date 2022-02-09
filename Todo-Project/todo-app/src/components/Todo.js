@@ -1,8 +1,28 @@
-import React from "react";
+import React, {useState} from "react";
 
 function Todo(props){
-    return(
-        <li>
+    const [isEditing, setEditing] = useState(false);
+
+    const editingTemplate = (
+        <form>
+            <div className="form-group">
+                <label htmlFor={props.id}>
+                    New name for {props.taskName}
+                </label>
+                <input id={props.id} type="text"/>
+            </div>
+            <div className="button-group">
+                <button type="button">
+                    Cancel
+                </button>
+                <button type="submit">
+                    Save
+                </button>
+            </div>
+        </form>
+    );
+    const viewTemplate = (
+        <div>
             <div>
                 <input
                  id={props.id} 
@@ -16,7 +36,7 @@ function Todo(props){
                 </label>
             </div>
             <div>
-                <button type="button">
+                <button type="button" onClick={()=> setEditing(true)}>
                     Edit
                 </button>
                 <button 
@@ -26,6 +46,12 @@ function Todo(props){
                     Delete
                 </button>
             </div>
+        </div>
+    );
+
+    return(
+        <li>
+            {isEditing? editingTemplate : viewTemplate}
         </li>
     );
 }

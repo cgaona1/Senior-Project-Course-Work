@@ -13,6 +13,7 @@ function App(props) {
         key={task.id}
         toggleTaskCompleted={toggleTaskCompleted}
         deleteTask={deleteTask}
+        editTask={editTask}
       />
     )
   );
@@ -23,12 +24,18 @@ function App(props) {
     const newTask = { id: "todo-"+nanoid(), taskName: name, completed: false };
     setTasks([...tasks, newTask]);
   }
-
   function deleteTask(id){
     const remainingTasks = tasks.filter(task => id !== task.id);
     setTasks(remainingTasks);
   }
-
+  function editTask(id, newName){
+    const editedTaskList = tasks.map(task => {
+      if(id === task.id){
+        return {...task, taskName: newName}
+      }
+    });
+    setTasks(editedTaskList);
+  }
   function toggleTaskCompleted(id){
     const updatedTasks = tasks.map(task =>{
       if(id === task.id){
