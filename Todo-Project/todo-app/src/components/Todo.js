@@ -19,7 +19,10 @@ function Todo(props){
                 <button type="button">
                     Edit
                 </button>
-                <button type="button">
+                <button 
+                    type="button"
+                    onClick={() => props.deleteTask(props.id)}
+                >
                     Delete
                 </button>
             </div>
