@@ -12,7 +12,7 @@ function Todo(props){
                 <input id={props.id} type="text"/>
             </div>
             <div className="button-group">
-                <button type="button">
+                <button type="button" onClick={()=> setEditing(false)}>
                     Cancel
                 </button>
                 <button type="submit">
