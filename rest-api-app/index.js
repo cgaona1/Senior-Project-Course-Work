@@ -1,13 +1,15 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 
+import studentsRoutes from './routes/students.js';
+
 const app = express();
 const PORT = 3000;
 
 app.use(bodyParser.json());
+app.use('/', studentsRoutes);
 
 app.get('/', (req, res) => {
-    console.log('[TEST]!');
     res.send('Hello from Homepage.');
 });
 
