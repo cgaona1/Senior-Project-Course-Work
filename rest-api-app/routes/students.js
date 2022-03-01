@@ -1,4 +1,5 @@
 import express from 'express';
+import { v4 as uuidv4 } from 'uuid';
 
 const router = express.Router();
 
@@ -15,12 +16,14 @@ const students = [
 
 router.route('/students')
     .get(function (req, res) {
-        console.log(students);
-        res.send('Hello from student route');
+        res.send(students);
     })
     .post(function (req, res) {
-        console.log('Route Reached');
-        res.send('Route Reached');
+        const student = req.body;
+
+        students.push({ ...student, id: uuidv4() });
+
+        res.send(`User with the name ${student.firstName} added to the database!`);
     });
 
 
