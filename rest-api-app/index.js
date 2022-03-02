@@ -7,7 +7,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(bodyParser.json());
-app.use('/', studentsRoutes);
+app.use('/students', studentsRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello from Homepage.');
