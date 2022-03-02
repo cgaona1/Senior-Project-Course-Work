@@ -3,7 +3,7 @@ import { getStudents,
         setStudent, 
         getStudent, 
         updateStudent,
-        deleteStudent } from '../controllers/student.js';
+        deleteStudent } from '../controllers/students.js';
 
 const router = express.Router();
 
