@@ -14,23 +14,34 @@ router.route('/')
 
         students.push({ ...student, id: uuidv4() });
 
-        res.send(`User with the name ${student.firstName} added to the database!`);
+        res.send(`Student with the name ${student.firstName} added to the database!`);
     });
 
 router.route('/:id')
-    .get(function (req, res){
-        const { id } = req.params
+    .get(function (req, res) {
+        const { id } = req.params;
 
-        const foundUser = students.find((student) => student.id === id);
+        const student = students.find((student) => student.id === id);
 
-        res.send(foundUser);
+        res.send(student);
+    })
+    .patch(function (req, res) {
+        const { id } = req.params;
+        const { firstName, lastName, age } = req.body;
+
+        const student = students.find((student) => student.id === id);
+        
+        if(firstName) student.firstName = firstName;
+        if(lastName) student.lastName = lastName;
+
+        res.send(`Student with the id ${ id } has been updated!`);
     })
     .delete(function (req, res) {
         const { id } = req.params;
 
         students = students.filter((student) => student.id !== id);
 
-        res.send(`User with the id ${ id } has been deleted!`);
+        res.send(`Student with the id ${ id } has been deleted!`);
     });
 
 
