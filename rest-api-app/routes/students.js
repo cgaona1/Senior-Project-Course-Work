@@ -7,10 +7,12 @@ import { getStudents,
 
 const router = express.Router();
 
+//route for /student
 router.route('/')
     .get(getStudents)
     .post(setStudent);
 
+//route for /student/:id
 router.route('/:id')
     .get(getStudent)
     .patch(updateStudent)
