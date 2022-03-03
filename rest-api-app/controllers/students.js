@@ -51,10 +51,17 @@ export const updateStudent = function (req, res) {
     res.send(`Student with the id ${id} has been updated!`);
 }
 
-export const deleteStudent = function (req, res) {
+export const deleteStudent = async function (req, res) {
     const { id } = req.params;
 
-    students = students.filter((student) => student.id !== id);
+    //students = students.filter((student) => student.id !== id);
+    try{
+        await studentModel.findByIdAndDelete(id);
+        res.status(201).json(getStudents);
+    }
+    catch(error){
+        res.status(404).json({message: error.message});
+    }
 
-    res.send(`Student with the id ${id} has been deleted!`);
+    //res.send(`Student with the id ${id} has been deleted!`);
 }
