@@ -39,29 +39,29 @@ export const getStudent = async function (req, res) {
     }
 }
 
-export const updateStudent = function (req, res) {
+export const updateStudent = async function (req, res) {
     const { id } = req.params;
     const { firstName, lastName } = req.body;
 
-    const student = students.find((student) => student.id === id);
-
-    if (firstName) student.firstName = firstName;
-    if (lastName) student.lastName = lastName;
-
-    res.send(`Student with the id ${id} has been updated!`);
+    try{
+        if (firstName) await studentModel.findByIdAndUpdate(id, {firstName: firstName});
+        if (lastName) await studentModel.findByIdAndUpdate(id, {lastName: lastName});
+        res.status(201).json(getStudent);
+    }
+    catch(error){
+        res.status(409).json({message: error.message});
+    }
+    
 }
 
 export const deleteStudent = async function (req, res) {
     const { id } = req.params;
 
-    //students = students.filter((student) => student.id !== id);
     try{
         await studentModel.findByIdAndDelete(id);
         res.status(201).json(getStudents);
     }
     catch(error){
-        res.status(404).json({message: error.message});
+        res.status(409).json({message: error.message});
     }
-
-    //res.send(`Student with the id ${id} has been deleted!`);
 }
