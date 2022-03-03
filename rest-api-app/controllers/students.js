@@ -1,17 +1,35 @@
-import { v4 as uuidv4 } from 'uuid';
+import studentModel from '../models/studentDetails.js';
+//import { v4 as uuidv4 } from 'uuid';
 
 let students = [];
 
-export const getStudents = function (req, res) {
-    res.send(students);
+export const getStudents = async function (req, res) {
+    try {
+        const studentsM = await studentModel.find();
+
+        res.status(200).json(studentsM);
+    }
+    catch (error){
+        res.status(404).json({message: error.message});
+    }
+    //res.send(students);
 }
 
-export const setStudent = function (req, res) {
+export const setStudent = async function (req, res) {
     const student = req.body;
+    //student.id = uuidv4;
+    //students.push({ ...student, id: uuidv4() });
+    //res.send(`Student with the name ${student.firstName} added to the database!`);
 
-    students.push({ ...student, id: uuidv4() });
+    const newStudent = new studentModel(student);
 
-    res.send(`Student with the name ${student.firstName} added to the database!`);
+    try{
+        await newStudent.save();
+        res.status(201).json(newStudent)
+    }
+    catch (error){
+        res.status(409).json({message: error.message});
+    }
 }
 
 export const getStudent = function (req, res) {
