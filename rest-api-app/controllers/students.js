@@ -1,5 +1,4 @@
 import studentModel from '../models/studentDetails.js';
-//import { v4 as uuidv4 } from 'uuid';
 
 let students = [];
 
@@ -12,14 +11,10 @@ export const getStudents = async function (req, res) {
     catch (error){
         res.status(404).json({message: error.message});
     }
-    //res.send(students);
 }
 
 export const setStudent = async function (req, res) {
     const student = req.body;
-    //student.id = uuidv4;
-    //students.push({ ...student, id: uuidv4() });
-    //res.send(`Student with the name ${student.firstName} added to the database!`);
 
     const newStudent = new studentModel(student);
 
@@ -32,17 +27,21 @@ export const setStudent = async function (req, res) {
     }
 }
 
-export const getStudent = function (req, res) {
+export const getStudent = async function (req, res) {
     const { id } = req.params;
 
-    const student = students.find((student) => student.id === id);
-
-    res.send(student);
+    try {
+        const student = await studentModel.findById(id);
+        res.status(200).json(student);
+    }
+    catch (error){
+        res.status(404).json({message: error.message});
+    }
 }
 
 export const updateStudent = function (req, res) {
     const { id } = req.params;
-    const { firstName, lastName, age } = req.body;
+    const { firstName, lastName } = req.body;
 
     const student = students.find((student) => student.id === id);
 
